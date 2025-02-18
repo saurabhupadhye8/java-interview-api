@@ -31,8 +31,15 @@ public class WidgetRepository {
     return result;
   }
 
+  public Widget updateWidget(Widget updatedWidget) {
+    this.table = table.stream()
+                      .map(widget -> updatedWidget.getName().equals(widget.getName()) ? updatedWidget : widget)
+                      .collect(Collectors.toCollection(ArrayList::new));
+
+    return updatedWidget;
+  }
+
   public Widget save(Widget widget) {
-    deleteById(widget.getName());
     table.add(widget);
     return widget;
   }
